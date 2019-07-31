@@ -63,7 +63,7 @@ sub log2_cache_size {
     my $cache_sz = 256;
 
     # TODO: How to find L2 cache size on other OS
-    if ($^O eq "linux") {
+    if ($^O eq "linux" && -e "/sys/devices/system/cpu/cpu0/cache/index3") {
         open my $fh, "<", "/sys/devices/system/cpu/cpu0/cache/index2/size";
 
         my $cache_sz = do { local $/; <$fh> };
